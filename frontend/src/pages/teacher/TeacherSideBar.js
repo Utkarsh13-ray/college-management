@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const TeacherSideBar = () => {
     const { currentUser } = useSelector((state) => state.user);
     const sclassName = (currentUser.teachSclass)
-    console.log(sclassName);
+    //console.log(sclassName);
 
     const location = useLocation();
     return (
