@@ -16,6 +16,8 @@ const TeacherHomePage = () => {
     const { currentUser } = useSelector((state) => state.user);
     const { subjectDetails, sclassStudents } = useSelector((state) => state.sclass);
 
+    console.log(subjectDetails);
+
     const classID = currentUser.teachSclass?._id
     const subjectID = currentUser.teachSubject?._id
 

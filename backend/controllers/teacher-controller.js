@@ -393,15 +393,16 @@ const generateAttendanceDoc = async (students) => {
 
 const downloadAtt = async (req, res) =>{
     try {
-        
-        const students = await Student.find({sclassName: '65c9f98374e6209cd1f16769'});
+        const classID = req.query.classID;
+        const subjectID = req.query.subjectID;
+        const students = await Student.find({sclassName: classID});
         // console.log(students);
         console.log((students[0].attendance)[0].status);
         const data = {
             students: students.map((student) => ({
                 rollNo: student.rollNum,
                 name: student.name,
-                daysPresent: student.attendance.filter((day) => day.status === 'Present' && day.subName=='65c9ffba74e6209cd1f16838').length
+                daysPresent: student.attendance.filter((day) => day.status === 'Present' && day.subName==subjectID).length
             }))
         };
         res.send(data);

@@ -15,6 +15,9 @@ dotenv.config();
 
 app.use(express.json({ limit: '10mb' }))
 app.use(cors())
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 mongoose
     .connect(process.env.MONGO_URL, {
