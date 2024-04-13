@@ -10,14 +10,12 @@ import {
 } from '@mui/material';
 import { AccountCircle, School, Group } from '@mui/icons-material';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/userRelated/userHandle';
+import {  useSelector } from 'react-redux';
+
 import Popup from '../components/Popup';
 
-const ChooseUser = ({ visitor }) => {
-  const dispatch = useDispatch()
+const ChooseUser = () => {
   const navigate = useNavigate()
-  const password = "zxc"
 
   const { status, currentUser, currentRole } = useSelector(state => state.user);;
 
@@ -30,7 +28,9 @@ const ChooseUser = ({ visitor }) => {
       
         navigate('/Adminlogin');
     }
-
+     else if(user === "Student"){
+      navigate('/Studentlogin')
+     }
 
     else if (user === "Teacher") {
       
@@ -44,7 +44,7 @@ const ChooseUser = ({ visitor }) => {
         navigate('/Admin/dashboard');
       }
       else if (currentRole === 'Student') {
-        //
+        navigate('/Student/dashboard')
       } else if (currentRole === 'Teacher') {
         navigate('/Teacher/dashboard');
       }
@@ -75,7 +75,7 @@ const ChooseUser = ({ visitor }) => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <StyledPaper elevation={3}>
-              <div onClick={() => navigateHandler("/")}>
+              <div onClick={() => navigateHandler("Student")}>
                 <Box mb={2}>
                   <School fontSize="large" />
                 </Box>

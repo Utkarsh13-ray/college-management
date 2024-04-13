@@ -26,12 +26,25 @@ const LoginPage = ({ role }) => {
 
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-
+    const [rollNumberError, setRollNumberError] = useState(false);
+    const [studentNameError, setStudentNameError] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
 
         if (role === "Student") {
-          //
+            const rollNum = event.target.rollNumber.value;
+            const studentName = event.target.studentName.value;
+            const password = event.target.password.value;
+
+            if (!rollNum || !studentName || !password) {
+                if (!rollNum) setRollNumberError(true);
+                if (!studentName) setStudentNameError(true);
+                if (!password) setPasswordError(true);
+                return;
+            }
+            const fields = { rollNum, studentName, password }
+            setLoader(true)
+            dispatch(loginUser(fields, role))
         }
 
         else {
@@ -54,6 +67,8 @@ const LoginPage = ({ role }) => {
         const { name } = event.target;
         if (name === 'email') setEmailError(false);
         if (name === 'password') setPasswordError(false);
+        if (name === 'rollNumber') setRollNumberError(false);
+        if (name === 'studentName') setStudentNameError(false);
     };
 
     
@@ -64,7 +79,7 @@ const LoginPage = ({ role }) => {
                 navigate('/Admin/dashboard');
             }
             else if (currentRole === 'Student') {
-               //
+                navigate('/Student/dashboard');
             } else if (currentRole === 'Teacher') {
                 navigate('/Teacher/dashboard');
             }
@@ -103,8 +118,37 @@ const LoginPage = ({ role }) => {
                             Welcome back! Please enter your details
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
-                           
-                                <TextField
+                        {role === "Student" ? (
+                                <>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="rollNumber"
+                                        label="Enter your Roll Number"
+                                        name="rollNumber"
+                                        autoComplete="off"
+                                        type="number"
+                                        autoFocus
+                                        error={rollNumberError}
+                                        helperText={rollNumberError && 'Roll Number is required'}
+                                        onChange={handleInputChange}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="studentName"
+                                        label="Enter your name"
+                                        name="studentName"
+                                        autoComplete="name"
+                                        autoFocus
+                                        error={studentNameError}
+                                        helperText={studentNameError && 'Name is required'}
+                                        onChange={handleInputChange}
+                                    />
+                                </>
+                                ):(<TextField
                                     margin="normal"
                                     required
                                     fullWidth
@@ -117,7 +161,7 @@ const LoginPage = ({ role }) => {
                                     helperText={emailError && 'Email is required'}
                                     onChange={handleInputChange}
                                 />
-                        
+                        )}
                             <TextField
                                 margin="normal"
                                 required
