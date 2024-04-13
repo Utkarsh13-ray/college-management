@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import * as XLSX from "xlsx";
 import {
   getClassStudents,
   getSubjectDetails,
@@ -24,14 +26,15 @@ const TeacherClassDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { sclassStudents, loading, error, getresponse } = useSelector(
-    (state) => state.sclass,
+    (state) => state.sclass
   );
 
   const { currentUser } = useSelector((state) => state.user);
   const { subjectDetails } = useSelector((state) => state.sclass);
-
-  const classID = currentUser.teachSclass[0]?._id;
-  const subjectID = currentUser.teachSubject[0]?._id;
+  const { index } = useParams();
+  const numericIndex = parseInt(index);
+  const classID = currentUser.teachSclass[numericIndex]?._id;
+  const subjectID = currentUser.teachSubject[numericIndex]?._id;
 
   // const subName =  axios.get(`${process.env.REACT_APP_BASE_URL}/Subject/${subject
   // console.log(subName);
@@ -133,32 +136,59 @@ const TeacherClassDetails = () => {
     );
   };
 
+  // const handleDownload = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}`,
+  //       {
+  //         responseType: "blob",
+  //       },
+  //     );
+
+  //     console.log(response); // This will show the Blob object
+
+  //     const url = window.URL.createObjectURL(response.data);
+
+  //     const a = document.createElement("a");
+  //     a.style.display = "none";
+  //     a.href = url;
+  //     a.download = "attendance.docx";
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     window.URL.revokeObjectURL(url);
+  //     document.body.removeChild(a); // Clean up the element after download
+  //   } catch (error) {
+  //     console.error("Error downloading attendance:", error);
+  //   }
+  // };
+
   const handleDownload = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}`,
         {
           responseType: "blob",
-        },
+        }
       );
 
-      console.log(response); // This will show the Blob object
+      const blobData = new Blob([response.data]);
+      const reader = new FileReader();
 
-      const url = window.URL.createObjectURL(response.data);
+      reader.onload = function (e) {
+        const jsonData = JSON.parse(e.target.result);
+        const studentsData = jsonData.students;
 
-      const a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
-      a.download = "attendance.docx";
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a); // Clean up the element after download
+        const worksheet = XLSX.utils.json_to_sheet(studentsData);
+        const excelFile = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(excelFile, worksheet, "Attendance");
+        XLSX.writeFile(excelFile, "attendance.xlsx");
+      };
+
+      reader.readAsText(blobData);
     } catch (error) {
       console.error("Error downloading attendance:", error);
     }
   };
-
   return (
     <>
       {loading ? (
