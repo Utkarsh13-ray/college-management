@@ -162,15 +162,15 @@ const TeacherClassDetails = () => {
   //   }
   // };
 
-  const handleDownload = async () => {
+  const handleDownload = async (type) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}`,
+        `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}&type=${type}`,
         {
           responseType: "blob",
         }
       );
-
+      console.log(response);
       const blobData = new Blob([response.data]);
       const reader = new FileReader();
 
@@ -215,7 +215,35 @@ const TeacherClassDetails = () => {
               <Typography variant="h5" gutterBottom>
                 Students List:
               </Typography>
-              <Button onClick={() => handleDownload()}>download</Button>
+              <div>
+                <Button
+                  onClick={() => handleDownload(0)}
+                  sx={{
+                    backgroundColor: "#4CAF50", // Green color
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#45a049", // Darker green color on hover
+                    },
+                    marginRight: "10px", // Add margin to create space between buttons
+                  }}
+                >
+                  Attendance Download
+                </Button>
+                <Button
+                  onClick={() => handleDownload(1)}
+                  sx={{
+                    backgroundColor: "#4CAF50", // Green color
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#45a049", // Darker green color on hover
+                    },
+                    marginRight: "10px", // Add margin to create space between buttons
+                  }}
+                >
+                  Low Attendance Download
+                </Button>
+              </div>
+
               {Array.isArray(sclassStudents) && sclassStudents.length > 0 && (
                 <TableTemplate
                   buttonHaver={StudentsButtonHaver}

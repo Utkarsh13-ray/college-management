@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const assignmentsController = require('../controllers/assignmentsController');
+const upload = require("../middleware/multer");
 // const { adminRegister, adminLogIn, deleteAdmin, getAdminDetail, updateAdmin } = require('../controllers/admin-controller.js');
 const { adminRegister, adminLogIn, getAdminDetail} = require('../controllers/admin-controller.js');
+const { getItems, addItem, downloadFile } = require("../controllers/assignmentsController.js");
 
 const { sclassCreate, sclassList, deleteSclass, deleteSclasses, getSclassDetail, getSclassStudents } = require('../controllers/class-controller.js');
 const { complainCreate, complainList } = require('../controllers/complain-controller.js');
@@ -72,8 +73,10 @@ router.delete("/Teacher/:id", deleteTeacher)
 router.put("/TeacherSubject", updateTeacherSubject)
 
 router.post('/TeacherAttendance/:id', teacherAttendance)
-router.post('/assignments/upload', assignmentsController.uploadAssignment);
 
+router.post("/api/v1/items", upload.single("file"), addItem)
+router.get("/api/v1/items", getItems)
+router.get("/api/v1/items/download/:id",downloadFile)
 
 // Notice
 

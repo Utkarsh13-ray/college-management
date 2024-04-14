@@ -621,7 +621,10 @@ const ViewStudent = () => {
             <TableHead>
               <StyledTableRow>
                 <StyledTableCell>Subject</StyledTableCell>
-                <StyledTableCell>Marks</StyledTableCell>
+                <StyledTableCell>Midsem Marks</StyledTableCell>
+                <StyledTableCell>Endsem Marks</StyledTableCell>
+                <StyledTableCell>Internal Marks</StyledTableCell>
+                <StyledTableCell>Total Marks</StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
@@ -632,6 +635,9 @@ const ViewStudent = () => {
                 return (
                   <StyledTableRow key={index}>
                     <StyledTableCell>{result.subName.subName}</StyledTableCell>
+                    <StyledTableCell>{result.midsemMarks}</StyledTableCell>
+                    <StyledTableCell>{result.endsemMarks}</StyledTableCell>
+                    <StyledTableCell>{result.internalMarks}</StyledTableCell>
                     <StyledTableCell>{result.marksObtained}</StyledTableCell>
                   </StyledTableRow>
                 );
@@ -708,12 +714,7 @@ const ViewStudent = () => {
         Class: {sclassName.sclassName}
         <br />
         Institute: {studentSchool.schoolName}
-        {subjectAttendance &&
-           (
-            <CustomPieChart
-              data={chartData}
-            />
-          )}
+        {subjectAttendance && <CustomPieChart data={chartData} />}
         <h1>Green represents student's present percentage</h1>
         <br />
         {/* <Button variant="contained" sx={styles.styledButton} className="show-tab" onClick={() => { setShowTab(!showTab) }}>
