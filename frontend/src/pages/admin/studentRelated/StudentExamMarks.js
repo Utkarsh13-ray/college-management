@@ -24,7 +24,9 @@ const StudentExamMarks = ({ situation }) => {
     const [studentID, setStudentID] = useState("");
     const [subjectName, setSubjectName] = useState("");
     const [chosenSubName, setChosenSubName] = useState("");
-    const [marksObtained, setMarksObtained] = useState("");
+    const [midsemMarks, setMidsemMarks] = useState("");
+    const [endsemMarks, setEndsemMarks] = useState("");
+    const [internalMarks, setInternalMarks] = useState("");
 
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState("");
@@ -58,7 +60,7 @@ const StudentExamMarks = ({ situation }) => {
         setChosenSubName(selectedSubject._id);
     }
 
-    const fields = { subName: chosenSubName, marksObtained }
+    const fields = { subName: chosenSubName, midsemMarks, endsemMarks, internalMarks }
 
     const submitHandler = (event) => {
         event.preventDefault()
@@ -149,9 +151,27 @@ const StudentExamMarks = ({ situation }) => {
                                         </FormControl>
                                     }
                                     <FormControl>
-                                        <TextField type="number" label='Enter marks'
-                                            value={marksObtained} required
-                                            onChange={(e) => setMarksObtained(e.target.value)}
+                                        <TextField type="number" label='Enter mid-sem marks'
+                                            value={midsemMarks} required
+                                            onChange={(e) => setMidsemMarks(e.target.value)}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormControl>
+                                        <TextField type="number" label='Enter end-sem marks'
+                                            value={endsemMarks} required
+                                            onChange={(e) => setEndsemMarks(e.target.value)}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormControl>
+                                        <TextField type="number" label='Enter internal marks'
+                                            value={internalMarks} required
+                                            onChange={(e) => setInternalMarks(e.target.value)}
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}

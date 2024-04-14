@@ -243,13 +243,25 @@ const TeacherViewStudent = () => {
                         <TableHead>
                           <StyledTableRow>
                             <StyledTableCell>Subject</StyledTableCell>
-                            <StyledTableCell>Marks</StyledTableCell>
+                            <StyledTableCell>Midsem Marks</StyledTableCell>
+                            <StyledTableCell>Endsem Marks</StyledTableCell>
+                            <StyledTableCell>Internal Marks</StyledTableCell>
+                            <StyledTableCell>Total Marks</StyledTableCell>
                           </StyledTableRow>
                         </TableHead>
                         <TableBody>
                           <StyledTableRow>
                             <StyledTableCell>
                               {result.subName.subName}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {result.midsemMarks}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {result.endsemMarks}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {result.internalMarks}
                             </StyledTableCell>
                             <StyledTableCell>
                               {result.marksObtained}

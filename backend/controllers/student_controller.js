@@ -144,7 +144,7 @@ const updateStudent = async (req, res) => {
 }
 
 const updateExamResult = async (req, res) => {
-    const { subName, marksObtained } = req.body;
+    const { subName, midsemMarks, endsemMarks, internalMarks } = req.body;
 
     try {
         const student = await Student.findById(req.params.id);
@@ -153,14 +153,24 @@ const updateExamResult = async (req, res) => {
             return res.send({ message: 'Student not found' });
         }
 
-        const existingResult = student.examResult.find(
+        let existingResult = student.examResult.find(
             (result) => result.subName.toString() === subName
         );
 
         if (existingResult) {
-            existingResult.marksObtained = marksObtained;
+            // Update existing result
+            if(existingResult.midsemMarks == 0) existingResult.midsemMarks = midsemMarks;
+            if(existingResult.endsemMarks==0) existingResult.endsemMarks = endsemMarks;
+            if(existingResult.internalMarks==0) existingResult.internalMarks = internalMarks;
         } else {
-            student.examResult.push({ subName, marksObtained });
+            // Add new result
+            existingResult = {
+                subName,
+                midsemMarks,
+                endsemMarks,
+                internalMarks
+            };
+            student.examResult.push(existingResult);
         }
 
         const result = await student.save();

@@ -1,40 +1,36 @@
-// controllers/assignmentsController.js
+const Item = require("../models/Item");
+const path = require("path");
+const asyncWrapper = require("../middleware/asyncWrapper");
 
-const multer = require('multer');
-
-// Set up Multer storage for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the directory where files will be saved
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname); // Keep the original file name
+const getItems = async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.status(200).json({ items });
+  } catch (error) {
+    console.log(error);
   }
-});
-
-// Initialize Multer with the storage configuration
-const upload = multer({ storage: storage }).single('assignment');
-
-// Controller function to handle file upload
-const uploadAssignment = (req, res) => {
-  // Handle the file upload using Multer middleware
-  console.log("aa rha hai");
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      // Multer error occurred
-      console.error('Multer error:', err);
-      return res.status(500).json({ success: false, message: 'An error occurred during file upload.' });
-    } else if (err) {
-      // Other error occurred
-      console.error('Unknown error:', err);
-      return res.status(500).json({ success: false, message: 'An unknown error occurred.', error: err });
-    }
-    
-    // File uploaded successfully
-    res.status(200).json({ success: true, message: 'File uploaded successfully' });
-  });
 };
 
+const addItem = asyncWrapper(async (req, res) => {
+  const { name } = req.body;
+  const file = req.file.path;
+  const item = await Item.create({ name, file });
+  res.status(201).json({ item });
+});
+
+const downloadFile = asyncWrapper(async (req, res) => {
+  const { id } = req.params;
+  const item = await Item.findById(id);
+  if (!item) {
+    return next(new Error("No item found"));
+  }
+  const file = item.file;
+  const filePath = path.join(__dirname, `../${file}`);
+  res.download(filePath);
+});
+
 module.exports = {
-  uploadAssignment
+  getItems,
+  addItem,
+  downloadFile,
 };
