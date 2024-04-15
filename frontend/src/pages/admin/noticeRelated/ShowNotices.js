@@ -7,7 +7,7 @@ import {
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getAllNotices } from '../../../redux/noticeRelated/noticeHandle';
-import { deleteUser } from '../../../redux/userRelated/userHandle';
+import { deleteNotice } from '../../../redux/noticeRelated/noticeHandle';
 import TableTemplate from '../../../components/TableTemplate';
 import { GreenButton } from '../../../components/buttonStyles';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
@@ -28,7 +28,7 @@ const ShowNotices = () => {
     }
 
     const deleteHandler = (deleteID, address) => {
-        dispatch(deleteUser(deleteID, address))
+        dispatch(deleteNotice(deleteID, address))
             .then(() => {
                 dispatch(getAllNotices(currentUser._id, "Notice"));
             })
