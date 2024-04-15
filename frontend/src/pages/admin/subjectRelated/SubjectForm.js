@@ -87,89 +87,91 @@ const SubjectForm = () => {
     }, [status, navigate, error, response, dispatch]);
 
     return (
-        <form onSubmit={submitHandler}>
-            <Box mb={2}>
-                <Typography variant="h6" >Add Subjects</Typography>
-            </Box>
-            <Grid container spacing={2}>
-                {subjects.map((subject, index) => (
-                    <React.Fragment key={index}>
-                        <Grid item xs={6}>
-                            <TextField
-                                fullWidth
-                                label="Subject Name"
-                                variant="outlined"
-                                value={subject.subName}
-                                onChange={handleSubjectNameChange(index)}
-                                sx={styles.inputField}
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                fullWidth
-                                label="Subject Code"
-                                variant="outlined"
-                                value={subject.subCode}
-                                onChange={handleSubjectCodeChange(index)}
-                                sx={styles.inputField}
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                fullWidth
-                                label="Sessions"
-                                variant="outlined"
-                                type="number"
-                                inputProps={{ min: 0 }}
-                                value={subject.sessions}
-                                onChange={handleSessionsChange(index)}
-                                sx={styles.inputField}
-                                required
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Box display="flex" alignItems="flex-end">
-                                {index === 0 ? (
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        onClick={handleAddSubject}
-                                    >
-                                        Add Subject
-                                    </Button>
+        <Box m={2}> 
+            <form onSubmit={submitHandler}>
+                <Box mb={2}>
+                    <Typography variant="h6" >Add Subjects</Typography>
+                </Box>
+                <Grid container spacing={2}>
+                    {subjects.map((subject, index) => (
+                        <React.Fragment key={index}>
+                            <Grid item xs={6}>
+                                <TextField
+                                    fullWidth
+                                    label="Subject Name"
+                                    variant="outlined"
+                                    value={subject.subName}
+                                    onChange={handleSubjectNameChange(index)}
+                                    sx={styles.inputField}
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    fullWidth
+                                    label="Subject Code"
+                                    variant="outlined"
+                                    value={subject.subCode}
+                                    onChange={handleSubjectCodeChange(index)}
+                                    sx={styles.inputField}
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    fullWidth
+                                    label="Sessions"
+                                    variant="outlined"
+                                    type="number"
+                                    inputProps={{ min: 0 }}
+                                    value={subject.sessions}
+                                    onChange={handleSessionsChange(index)}
+                                    sx={styles.inputField}
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box display="flex" alignItems="flex-end">
+                                    {index === 0 ? (
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            onClick={handleAddSubject}
+                                        >
+                                            Add Subject
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outlined"
+                                            color="error"
+                                            onClick={handleRemoveSubject(index)}
+                                        >
+                                            Remove
+                                        </Button>
+                                    )}
+                                </Box>
+                            </Grid>
+                        </React.Fragment>
+                    ))}
+                    <Grid item xs={12}>
+                        <Box display="flex" justifyContent="center">
+                            <Button variant="contained" color="primary" type="submit" disabled={loader}>
+                                {loader ? (
+                                    <CircularProgress size={24} color="inherit" />
                                 ) : (
-                                    <Button
-                                        variant="outlined"
-                                        color="error"
-                                        onClick={handleRemoveSubject(index)}
-                                    >
-                                        Remove
-                                    </Button>
+                                    'Save'
                                 )}
-                            </Box>
-                        </Grid>
-                    </React.Fragment>
-                ))}
-                <Grid item xs={12}>
-                    <Box display="flex" justifyContent="center">
-                        <Button variant="contained" color="primary" type="submit" disabled={loader}>
-                            {loader ? (
-                                <CircularProgress size={24} color="inherit" />
-                            ) : (
-                                'Save'
-                            )}
-                        </Button>
-                    </Box>
+                            </Button>
+                        </Box>
+                    </Grid>
+                    <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
                 </Grid>
-                <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
-            </Grid>
-        </form>
+            </form>
+        </Box>
     );
 }
 
-export default SubjectForm
+export default SubjectForm;
 
 const styles = {
     inputField: {
