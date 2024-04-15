@@ -215,10 +215,12 @@ const ClassDetails = () => {
                 <Typography variant="h6" gutterBottom>
                     Number of Students: {numberOfStudents}
                 </Typography>
+                
                 {getresponse &&
                     <GreenButton
                         variant="contained"
                         onClick={() => navigate("/Admin/class/addstudents/" + classID)}
+                        sx={{marginTop: '10px',marginRight:'10px' }}
                     >
                         Add Students
                     </GreenButton>
@@ -227,6 +229,7 @@ const ClassDetails = () => {
                     <GreenButton
                         variant="contained"
                         onClick={() => navigate("/Admin/addsubject/" + classID)}
+                        sx={{marginTop: '10px'}}
                     >
                         Add Subjects
                     </GreenButton>
