@@ -28,6 +28,23 @@ const noticeSlice = createSlice({
         getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        deleteRequest: (state) => {
+            state.loading = true;
+        },
+        deleteSuccess: (state) => {
+            state.loading = false;
+            state.error = null;
+            state.response = "Notice deleted successfully"; // Set your success message here
+        },
+        deleteFailed: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            state.response = action.payload; // Set your error message here
+        },
+        deleteError: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
         }
     },
 });
@@ -36,7 +53,11 @@ export const {
     getRequest,
     getSuccess,
     getFailed,
-    getError
+    getError,
+    deleteRequest,
+    deleteSuccess,
+    deleteFailed,
+    deleteError
 } = noticeSlice.actions;
 
 export const noticeReducer = noticeSlice.reducer;
