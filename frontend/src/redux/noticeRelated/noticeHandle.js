@@ -3,7 +3,11 @@ import {
     getRequest,
     getSuccess,
     getFailed,
-    getError
+    getError,
+    deleteRequest,
+    deleteSuccess,
+    deleteFailed,
+    deleteError
 } from './noticeSlice';
 
 export const getAllNotices = (id, address) => async (dispatch) => {
@@ -18,5 +22,20 @@ export const getAllNotices = (id, address) => async (dispatch) => {
         }
     } catch (error) {
         dispatch(getError(error));
+    }
+}
+
+export const deleteNotice = (noticeId, address) => async (dispatch) => {
+    dispatch(deleteRequest());
+
+    try {
+        const result = await axios.delete(`${process.env.REACT_APP_BASE_URL}/${address}/${noticeId}`);
+        if (result.data.message) {
+            dispatch(deleteFailed(result.data.message));
+        } else {
+            dispatch(deleteSuccess());
+        }
+    } catch (error) {
+        dispatch(deleteError(error));
     }
 }
