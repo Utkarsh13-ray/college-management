@@ -1,3 +1,4 @@
+// userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -50,9 +51,8 @@ const userSlice = createSlice({
             state.currentUser = null;
             state.status = 'idle';
             state.error = null;
-            state.currentRole = null
+            state.currentRole = null;
         },
-
         doneSuccess: (state, action) => {
             state.userDetails = action.payload;
             state.loading = false;
@@ -64,7 +64,6 @@ const userSlice = createSlice({
             state.error = null;
             state.response = null;
         },
-
         getRequest: (state) => {
             state.loading = true;
         },
@@ -100,3 +99,5 @@ export const {
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
+
+  
