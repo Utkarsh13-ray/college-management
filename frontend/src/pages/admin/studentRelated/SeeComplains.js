@@ -29,14 +29,19 @@ const SeeComplains = () => {
   const complainRows = complainsList && complainsList.length > 0 && complainsList.map((complain) => {
     const date = new Date(complain.date);
     const dateString = date.toString() !== "Invalid Date" ? date.toISOString().substring(0, 10) : "Invalid Date";
+    
+    // Check if complain.user exists, if not, return null to exclude it from rendering
+    if (!complain.user) {
+      return null;
+    }
+  
     return {
       user: complain.user.name,
       complaint: complain.complaint,
       date: dateString,
       id: complain._id,
     };
-  });
-
+  }).filter(Boolean); 
   const ComplainButtonHaver = ({ row }) => {
     return (
       <>
@@ -51,7 +56,7 @@ const SeeComplains = () => {
         <div>Loading...</div>
         :
         <>
-          {response ?
+          {complainRows.length === 0 ?
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
               No Queries Right Now
             </Box>
