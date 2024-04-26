@@ -24,7 +24,7 @@ const TableTemplate = ({ buttonHaver: ButtonHaver, columns, rows }) => {
                         </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => {
+                        {rows && Array.isArray(rows) && rows.map((row) => {
                             return (
                                 <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                     {columns.map((column) => {

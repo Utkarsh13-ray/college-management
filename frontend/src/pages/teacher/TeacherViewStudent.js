@@ -215,10 +215,14 @@ const TeacherViewStudent = () => {
                           attendance.subName._id === teachSubjectID
                       );
                       const daysPresent = filteredAttendance.length;
-                      const total = filteredAttendance[0].subName.sessions;
-                      let attendancePercentage = (daysPresent / total).toFixed(
-                        2
-                      );
+                      let total, attendancePercentage;
+                      if(filteredAttendance.length>0) {
+                        total = filteredAttendance[0].subName.sessions;
+                        attendancePercentage = (daysPresent / total).toFixed(2);
+                      }else{
+                        attendancePercentage=0;
+                      }
+                        
                       attendancePercentage = attendancePercentage * 100;
                       chartData = [
                         { name: "Present", value: attendancePercentage },
