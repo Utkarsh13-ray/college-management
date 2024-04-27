@@ -224,7 +224,7 @@ const TeacherClassDetails = () => {
                     "&:hover": {
                       backgroundColor: "#45a049", // Darker green color on hover
                     },
-                    marginRight: "10px", // Add margin to create space between buttons
+                    margin: "10px", // Add margin to create space between buttons
                   }}
                 >
                   Attendance Download
