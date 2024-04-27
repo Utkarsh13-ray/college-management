@@ -84,7 +84,7 @@ const StudentSideBar = () => {
               }
             />
           </ListItemIcon>
-          <ListItemText primary="Complain" />
+          <ListItemText primary="Query" />
         </ListItemButton>
       </React.Fragment>
       <Divider sx={{ my: 1 }} />
