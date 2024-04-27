@@ -64,8 +64,9 @@ a {
 .Parllel {
   display: flex;
   flex-direction: row;
-  margin-top: 10%;
   justify-content: space-around;
+  gap: 1rem;
+  margin: 5px;
 }
 
 
@@ -85,6 +86,9 @@ a {
 }
 
 @media screen and (max-width: 480px) {
+  .Parllel{
+    flex-direction: column;
+  }
   .register {
     background-position: right;
   }
