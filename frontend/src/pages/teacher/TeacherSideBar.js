@@ -72,7 +72,7 @@ const TeacherSideBar = () => {
               }
             />
           </ListItemIcon>
-          <ListItemText primary="Class-Info" />
+          <ListItemText primary="Assignments" />
         </ListItemButton>
       </React.Fragment>
       <Divider sx={{ my: 1 }} />
