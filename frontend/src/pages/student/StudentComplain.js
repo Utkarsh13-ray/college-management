@@ -67,7 +67,7 @@ const StudentComplain = () => {
                 >
                     <div>
                         <Stack spacing={1} sx={{ mb: 3 }}>
-                            <Typography variant="h4">Complain</Typography>
+                            <Typography variant="h4">Add Query</Typography>
                         </Stack>
                         <form onSubmit={submitHandler}>
                             <Stack spacing={3}>
@@ -83,7 +83,7 @@ const StudentComplain = () => {
                                 />
                                 <TextField
                                     fullWidth
-                                    label="Write your complain"
+                                    label="Write your query"
                                     variant="outlined"
                                     value={complaint}
                                     onChange={(event) => {
