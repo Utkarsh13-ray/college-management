@@ -13,7 +13,7 @@ import { getSubjectList } from '../../redux/sclassRelated/sclassHandle';
 
 const StudentHomePage = () => {
     const dispatch = useDispatch();
-
+     
     const { userDetails, currentUser, loading, response } = useSelector((state) => state.user);
     const { subjectsList } = useSelector((state) => state.sclass);
 
@@ -45,7 +45,7 @@ const StudentHomePage = () => {
         <>
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} md={3} lg={3}>
+                    <Grid item xs={12} md={6} lg={6}>
                         <StyledPaper>
                             <img src={Subject} alt="Subjects" />
                             <Title>
@@ -54,7 +54,7 @@ const StudentHomePage = () => {
                             <Data start={0} end={numberOfSubjects} duration={2.5} />
                         </StyledPaper>
                     </Grid>
-                    <Grid item xs={12} md={3} lg={3}>
+                    <Grid item xs={12} md={6} lg={6}>
                         <StyledPaper>
                             <img src={Assignment} alt="Assignments" />
                             <Title>
