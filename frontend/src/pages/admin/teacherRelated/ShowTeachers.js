@@ -44,7 +44,7 @@ const ShowTeachers = () => {
     const deleteHandler = (deleteID, address) => {
         console.log(deleteID);
         console.log(address);
-        setMessage("Sorry the delete function has been disabled for now.")
+        setMessage("Deleted Successfully")
         setShowPopup(true)
 
         dispatch(deleteUser(deleteID, address)).then(() => {
