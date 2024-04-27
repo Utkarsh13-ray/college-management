@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Box, Button } from '@mui/material';
 import styled from 'styled-components';
-import Students from "../assets/students.svg";
+import Students from "../assets/homewall.png";
 import { LightPurpleButton } from '../components/buttonStyles';
 
 const Homepage = () => {
@@ -52,7 +52,8 @@ const StyledContainer = styled(Container)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
+  margin-top:5rem;
 `;
 
 const StyledPaper = styled.div`
@@ -66,7 +67,7 @@ const StyledBox = styled(Box)`
   align-items: center;
   justify-content:center;
   gap: 16px;
-  padding: 24px;
+  padding-top: 24px;
 `;
 
 const StyledTitle = styled.h1`
