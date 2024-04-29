@@ -54,7 +54,7 @@ const ClassSubjects = () => {
     <div style={styles.container}>
       <div style={styles.formContainer}>
         <Stack spacing={1} sx={{ mb: 3 }}>
-          <Typography variant="h4">Add Query</Typography>
+          <Typography variant="h4">Add Assignment</Typography>
         </Stack>
         <div className="addItems">
           <input
