@@ -77,7 +77,7 @@ router.post('/TeacherAttendance/:id', teacherAttendance)
 router.post("/api/v1/items", upload.single("file"), addItem)
 router.get("/api/v1/items", getItems)
 router.get("/api/v1/items/download/:id",downloadFile)
-
+router.get("/assignments", )
 // Notice
 
 router.post('/NoticeCreate', noticeCreate);

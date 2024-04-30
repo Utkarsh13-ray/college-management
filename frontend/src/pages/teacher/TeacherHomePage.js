@@ -52,13 +52,6 @@ const TeacherHomePage = () => {
                         </StyledPaper>
                     </Grid>
                     <Grid item xs={12} md={4} lg={4}>
-                        <StyledPaper>
-                            <img src={Tests} alt="Tests" />
-                            <Title>
-                                Assignments
-                            </Title>
-                            <Data start={0} end={24} duration={4} />
-                        </StyledPaper>
                     </Grid>
                     <Grid item xs={12}>
                         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>

@@ -51,18 +51,25 @@ const ClassAssignments = () => {
   return (
     <div>
       <div className="items">
-        {items.length > 0 ? (
-          items.map((item) => (
+      {items.length > 0 ? (
+    items.map((item) => {
+        // Split the filename by 'Z' character and get the second part
+        const fileName = item.file.split('Z')[1];
+        return (
             <div className="item" key={item._id}>
-              <h3>{item.name}</h3>
-              <button onClick={() => downloadFile(item._id)}>
-                Download File
-              </button>
+                <h3>{fileName}</h3>
+                <button onClick={() => downloadFile(item._id)}>
+                    Download File
+                </button>
             </div>
-          ))
-        ) : (
-          <p>You don't have any assignments.</p>
-        )}
+        );
+    })
+) : (
+    <p>You don't have any assignments.</p>
+)}
+
+
+
       </div>
     </div>
   );

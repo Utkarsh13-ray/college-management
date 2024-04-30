@@ -93,7 +93,6 @@ const deleteSclasses = async (req, res) => {
         }
         const deletedStudents = await Student.deleteMany({ school: req.params.id });
         const deletedSubjects = await Subject.deleteMany({ school: req.params.id });
-        const deletedTeachers = await Teacher.deleteMany({ school: req.params.id });
         res.send(deletedClasses);
     } catch (error) {
         res.status(500).json(error);
