@@ -12,7 +12,7 @@ const ClassSubjects = () => {
   const getItems = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/items");
+      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v1/items`);
       setItems(res.data.items);
       setLoading(false);
       console.log(res.data.items);
@@ -28,7 +28,7 @@ const ClassSubjects = () => {
       formData.append("name", name);
       formData.append("file", fileInputRef.current.files[0]);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/items",
+        `${process.env.REACT_APP_BASE_URL}/api/v1/items`,
         formData
       );
       console.log(res);

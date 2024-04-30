@@ -46,7 +46,7 @@ const StudentHomePage = () => {
 
     const getItems = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/v1/items");
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v1/items`);
     
             // Filter the items based on the name property matching the cname value from the URL
             const filteredItems = await res.data.items.filter(item => item.name === currentUser.sclassName.sclassName);

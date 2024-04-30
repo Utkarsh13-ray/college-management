@@ -14,7 +14,7 @@ const ClassAssignments = () => {
   const getItems = async () => {
     setLoading(true);
     try {
-        const res = await axios.get("http://localhost:5000/api/v1/items");
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/v1/items`);
         console.log(res);
 
         // Filter the items based on the name property matching the cname value from the URL
@@ -31,7 +31,7 @@ const ClassAssignments = () => {
   const downloadFile = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/v1/items/download/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/api/v1/items/download/${id}`,
         { responseType: "blob" }
       );
       const blob = new Blob([res.data], { type: res.data.type });
