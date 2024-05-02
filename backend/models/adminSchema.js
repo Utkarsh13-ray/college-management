@@ -22,7 +22,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true
-    }
+    },minAttendance: {
+        type: Number,
+        default: 50
+    },
 });
 
 module.exports = mongoose.model("admin", adminSchema)

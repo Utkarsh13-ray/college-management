@@ -81,6 +81,7 @@ const adminRegister = async (req, res) => {
 };
 
 const adminLogIn = async (req, res) => {
+    console.log("aa rha hai");
     if (req.body.email && req.body.password) {
         let admin = await Admin.findOne({ email: req.body.email });
         if (admin) {
@@ -112,6 +113,28 @@ const getAdminDetail = async (req, res) => {
         res.status(500).json(err);
     }
 }
+
+const setAttendancePt = async (req, res) => {
+    try {
+        const { id, minAttendance } = req.body;
+        console.log(id);
+        console.log(minAttendance);
+        let admin = await Admin.findById(id);
+        if (admin) {
+            admin.minAttendance=minAttendance;
+            await admin.save();
+            admin.password = undefined;
+            res.send(admin);
+        }
+        else {
+            res.send({ message: "No admin found" });
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
 
 // const deleteAdmin = async (req, res) => {
 //     try {
@@ -149,4 +172,4 @@ const getAdminDetail = async (req, res) => {
 
 // module.exports = { adminRegister, adminLogIn, getAdminDetail, deleteAdmin, updateAdmin };
 
-module.exports = { adminRegister, adminLogIn, getAdminDetail };
+module.exports = { adminRegister, adminLogIn, getAdminDetail, setAttendancePt };

@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const Teacher = require("../models/teacherSchema.js");
 const Subject = require("../models/subjectSchema.js");
 const Student = require("../models/studentSchema.js");
+const Admin = require("../models/adminSchema.js")
 const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
@@ -349,20 +350,22 @@ const downloadAtt = async (req, res) => {
     const tot_sessions = subject[0].sessions;
     const type = req.query.type;
     let filteredStudents = [];
-
+    let admin = await Admin.findById(req.query.ap);
+    
     if (type == 1) {
-      // Filter students with attendance less than 20%
+      // Filter students with less attendance
       filteredStudents = students.filter((student) => {
         const daysPresent = student.attendance.filter(
           (day) => day.status === "Present" && day.subName == subjectID
         ).length;
-        console.log(daysPresent);
         const attendancePercentage = (daysPresent / tot_sessions) * 100;
-        // console.log(attendancePercentage);
-        return attendancePercentage < 20;
+        return attendancePercentage < admin?.minAttendance;
+        // return attendancePercentage < 40;
+
       });
     } else {
       // If type !== 1, include all students
+      console.log("2nd");
       filteredStudents = students;
     }
     // console.log(filteredStudents);

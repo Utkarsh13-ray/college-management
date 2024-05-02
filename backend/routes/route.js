@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const upload = require("../middleware/multer");
 // const { adminRegister, adminLogIn, deleteAdmin, getAdminDetail, updateAdmin } = require('../controllers/admin-controller.js');
-const { adminRegister, adminLogIn, getAdminDetail} = require('../controllers/admin-controller.js');
+const { adminRegister, adminLogIn, getAdminDetail, setAttendancePt} = require('../controllers/admin-controller.js');
 const { getItems, addItem, downloadFile } = require("../controllers/assignmentsController.js");
 
 const { sclassCreate, sclassList, deleteSclass, deleteSclasses, getSclassDetail, getSclassStudents } = require('../controllers/class-controller.js');
@@ -30,6 +30,7 @@ router.post('/AdminReg', adminRegister);
 router.post('/AdminLogin', adminLogIn);
 
 router.get("/Admin/:id", getAdminDetail)
+router.post("/admin/setMinAttendance", setAttendancePt)
 // router.delete("/Admin/:id", deleteAdmin)
 
 // router.put("/Admin/:id", updateAdmin)
