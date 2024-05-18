@@ -181,7 +181,7 @@ const ViewSubject = () => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} sx={{ position: 'fixed', width: '100%', bgcolor: 'background.paper', zIndex: 1 }}>
                   <Tab label="Details" value="1" />
-                  <Tab label="Students" value="2" />
+                  
                 </TabList>
               </Box>
               <Container sx={{ marginTop: "3rem", marginBottom: "4rem" }}>

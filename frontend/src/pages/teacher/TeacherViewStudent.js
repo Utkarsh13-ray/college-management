@@ -86,7 +86,7 @@ const TeacherViewStudent = () => {
           <br />
           Class: {sclassName.sclassName}
           <br />
-          School: {studentSchool.schoolName}
+          Institute: {studentSchool.schoolName}
           <br />
           <br />
           <h3>Attendance:</h3>

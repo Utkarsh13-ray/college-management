@@ -27,7 +27,9 @@ export const loginUser = (fields, role) => async (dispatch) => {
             dispatch(authFailed(result.data.message));
         }
     } catch (error) {
+        console.log("this is error");
         dispatch(authError(error));
+
     }
 };
 

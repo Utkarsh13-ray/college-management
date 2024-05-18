@@ -50,7 +50,7 @@ const AdminProfile = () => {
             <br />
             Email: {currentUser.email}
             <br />
-            School: {currentUser.schoolName}
+            Institute: {currentUser.schoolName}
             <br />
             {/* <Button variant="contained" color="error" onClick={deleteHandler}>Delete</Button> */}
             {/* <Button variant="contained" sx={styles.showButton}

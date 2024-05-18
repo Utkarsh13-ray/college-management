@@ -1,4 +1,5 @@
-import { Container, Grid, Paper } from '@mui/material'
+import React, { useState } from 'react';
+import { Container, Grid, Paper, Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText,DialogActions } from '@mui/material';
 import SeeNotice from '../../components/SeeNotice';
 import Students from "../../assets/img1.png";
 import Classes from "../../assets/img2.png";
@@ -11,6 +12,7 @@ import { useEffect } from 'react';
 import { getAllSclasses } from '../../redux/sclassRelated/sclassHandle';
 import { getAllStudents } from '../../redux/studentRelated/studentHandle';
 import { getAllTeachers } from '../../redux/teacherRelated/teacherHandle';
+import axios from 'axios';
 
 const AdminHomePage = () => {
     const dispatch = useDispatch();
@@ -22,6 +24,9 @@ const AdminHomePage = () => {
 
     const adminID = currentUser._id
 
+    const [minAttendance, setMinAttendance] = useState('');
+    const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+
     useEffect(() => {
         dispatch(getAllStudents(adminID));
         dispatch(getAllSclasses(adminID, "Sclass"));
@@ -31,6 +36,23 @@ const AdminHomePage = () => {
     const numberOfStudents = studentsList && studentsList.length;
     const numberOfClasses = sclassesList && sclassesList.length;
     const numberOfTeachers = teachersList && teachersList.length;
+
+    const handleSetMinAttendance = () => {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/admin/setMinAttendance`, {
+            id: adminID,
+            minAttendance: minAttendance
+        })
+        .then(response => {
+            setSuccessDialogOpen(true);
+        })
+        .catch(error => {
+            console.error("Error occurred:", error);
+        });
+    };
+
+    const handleDialogClose = () => {
+        setSuccessDialogOpen(false);
+    };
 
     return (
         <>
@@ -68,12 +90,41 @@ const AdminHomePage = () => {
                             <SeeNotice />
                         </Paper>
                     </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                        <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
+                            <TextField
+                                label="Set Min Attendance"
+                                variant="outlined"
+                                value={minAttendance}
+                                onChange={(e) => setMinAttendance(e.target.value)}
+                                sx={{ mr: 2 }}
+                            />
+                            <Button variant="contained" onClick={handleSetMinAttendance}>Set Min Attendance</Button>
+                        </Paper>
+                    </Grid>
                 </Grid>
             </Container>
+            <Dialog
+                open={successDialogOpen}
+                onClose={handleDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Attendance Criteria Updated"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        The attendance criteria has been successfully updated.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose} autoFocus>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 };
-
 
 const StyledPaper = styled(Paper)`
   padding: 16px;
@@ -94,4 +145,4 @@ const Data = styled(CountUp)`
   color: green;
 `;
 
-export default AdminHomePage
+export default AdminHomePage;

@@ -35,7 +35,7 @@ const TeacherClassDetails = () => {
   const numericIndex = parseInt(index);
   const classID = currentUser.teachSclass[numericIndex]?._id;
   const subjectID = currentUser.teachSubject[numericIndex]?._id;
-
+  console.log(currentUser);
   // const subName =  axios.get(`${process.env.REACT_APP_BASE_URL}/Subject/${subject
   // console.log(subName);
   useEffect(() => {
@@ -165,7 +165,7 @@ const TeacherClassDetails = () => {
   const handleDownload = async (type) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}&type=${type}`,
+        `${process.env.REACT_APP_BASE_URL}/downloadAttendance?classID=${classID}&subjectID=${subjectID}&type=${type}&ap=${currentUser?.school?._id}`,
         {
           responseType: "blob",
         }

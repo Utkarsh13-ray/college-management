@@ -33,7 +33,7 @@ const TeacherProfile = () => {
           <ProfileText>Class: {joinWithCommas(teachSclass)}</ProfileText>
           {/* Displaying subjects as comma-separated list */}
           <ProfileText>Subject: {joinWithCommas2(teachSubject)}</ProfileText>
-          <ProfileText>School: {teachSchool.schoolName}</ProfileText>
+          <ProfileText>Institute: {teachSchool.schoolName}</ProfileText>
         </div>
       </ProfileCard>
     </>
